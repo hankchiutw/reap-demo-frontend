@@ -1,0 +1,15 @@
+<div class="title">Instapic</div>
+<div [formGroup]="formGroup">
+  <input type="text" placeholder="User name" formControlName="username" />
+  <input type="password" placeholder="Password" formControlName="password" />
+  <div *ngIf="!useSignUp">
+    <div (click)="doLogin()">Login</div>
+    <div>No Account?<span (click)="useSignUp = true">Sign Up</span></div>
+  </div>
+  <div *ngIf="useSignUp">
+    <div (click)="doSignUp()">Sign up</div>
+    <div>
+      Already Have An Account?<span (click)="useSignUp = false">Login</span>
+    </div>
+  </div>
+</div>
