@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["apps/instapic/src/app/*"]
+      "@app/*": ["apps/instapic/src/app/*"],
+      "@env": ["apps/instapic/src/environments/environment.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

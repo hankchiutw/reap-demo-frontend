@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment as env } from '@env';
 import { Observable } from 'rxjs';
 import { ResourcePath, ProcedurePath } from './request-path';
 
@@ -18,7 +19,14 @@ export class ApiService {
 
   public send<T>(options: ApiOptions): Observable<T> {
     const { method, path, body } = options;
-    return this.http.request<T>(method, path, { body });
+    const url = `${env.apiUrl}/${path}`;
+    const requestOptions = {
+      body,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    };
+    return this.http.request<T>(method, url, requestOptions);
   }
 
   public post<T>(path: ApiOptions['path'], params?: Params): Observable<T> {
