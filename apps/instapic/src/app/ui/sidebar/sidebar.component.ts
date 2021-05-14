@@ -1,16 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { LogoutUsecase } from './logout.usecase';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [LogoutUsecase],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
+  constructor(private logoutUsecase: LogoutUsecase) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  logout() {
+    this.logoutUsecase.logout().subscribe();
   }
-
 }
