@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoginFormUsecase } from './login-form.usecase';
+import { Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-form',
@@ -17,18 +19,42 @@ export class LoginFormComponent {
 
   public useSignUp = false;
 
+  public errorMessage$ = new Subject<string>();
+
   constructor(private fb: FormBuilder, private usecase: LoginFormUsecase) {}
 
   public doLogin() {
     this.usecase
       .doLogin(this.formValue('username'), this.formValue('password'))
+      .pipe(
+        catchError((e) => {
+          this.errorMessage$.next(e);
+          return null;
+        })
+      )
       .subscribe();
   }
 
   public doSignUp() {
     this.usecase
       .doSignUp(this.formValue('username'), this.formValue('password'))
-      .subscribe();
+      .pipe(
+        catchError((e) => {
+          this.errorMessage$.next(e);
+          return null;
+        })
+      )
+      .subscribe(() => {
+        this.reset();
+        alert('Sign up successfully');
+        this.useSignUp = false;
+      });
+  }
+
+  public reset() {
+    this.errorMessage$.next('');
+    this.formGroup.get('username').setValue('');
+    this.formGroup.get('password').setValue('');
   }
 
   private formValue(name: string) {

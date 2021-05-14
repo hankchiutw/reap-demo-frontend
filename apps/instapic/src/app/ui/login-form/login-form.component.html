@@ -1,15 +1,25 @@
 <div class="title">Instapic</div>
-<div [formGroup]="formGroup">
-  <input type="text" placeholder="User name" formControlName="username" />
-  <input type="password" placeholder="Password" formControlName="password" />
+<div class="form" [formGroup]="formGroup">
+  <div class="row">
+    <input type="text" placeholder="User name" formControlName="username" />
+  </div>
+  <div class="row">
+    <input type="password" placeholder="Password" formControlName="password" />
+  </div>
+
+  <div class="error-message">{{ errorMessage$ | async }}</div>
   <div *ngIf="!useSignUp">
-    <div (click)="doLogin()">Login</div>
-    <div>No Account?<span (click)="useSignUp = true">Sign Up</span></div>
+    <div class="row submit-button" (click)="doLogin()">Login</div>
+    <div class="row hint">
+      No Account?&nbsp;<span (click)="useSignUp = true; reset()">Sign Up</span>
+    </div>
   </div>
   <div *ngIf="useSignUp">
-    <div (click)="doSignUp()">Sign up</div>
-    <div>
-      Already Have An Account?<span (click)="useSignUp = false">Login</span>
+    <div class="row submit-button" (click)="doSignUp()">Sign up</div>
+    <div class="row hint">
+      Already Have An Account?&nbsp;<span (click)="useSignUp = false; reset()"
+        >Login</span
+      >
     </div>
   </div>
 </div>

@@ -29,7 +29,7 @@ export class ApiService {
     return this.http.request<ApiResult>(method, url, requestOptions).pipe(
       map(({ result, errorMessage }) => {
         if (errorMessage) {
-          throw new Error(errorMessage);
+          throw errorMessage;
         }
         return result;
       })
