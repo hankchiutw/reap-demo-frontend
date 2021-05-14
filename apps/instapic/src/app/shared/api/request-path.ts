@@ -1,7 +1,7 @@
 export enum ProcedurePath {
   authLogin = 'auth/login',
   authSignUp = 'auth/signup',
-  me = 'me',
+  me = 'auth/me',
 }
 
 export enum ResourcePath {

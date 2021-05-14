@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '@env';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ResourcePath, ProcedurePath } from './request-path';
+import { ApiResult } from './models';
 
 interface Params {
   body?: unknown;
@@ -22,11 +24,16 @@ export class ApiService {
     const url = `${env.apiUrl}/${path}`;
     const requestOptions = {
       body,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
+      withCredentials: true,
     };
-    return this.http.request<T>(method, url, requestOptions);
+    return this.http.request<ApiResult>(method, url, requestOptions).pipe(
+      map(({ result, errorMessage }) => {
+        if (errorMessage) {
+          throw new Error(errorMessage);
+        }
+        return result;
+      })
+    );
   }
 
   public post<T>(path: ApiOptions['path'], params?: Params): Observable<T> {
