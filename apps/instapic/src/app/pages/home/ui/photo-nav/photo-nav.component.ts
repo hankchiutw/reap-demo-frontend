@@ -1,9 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { HomeContext } from '../../entities';
 
 @Component({
   selector: 'app-photo-nav',
@@ -12,10 +8,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoNavComponent implements OnInit {
-  @Input()
-  private userId: number;
+  public get userId() {
+    return this.context.selectedUserId;
+  }
 
-  constructor() {}
+  constructor(private context: HomeContext) {}
 
   ngOnInit(): void {}
 }

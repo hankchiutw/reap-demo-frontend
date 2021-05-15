@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { User } from './user';
 
 @Injectable()
 export class AuthStatus {
-  public username: string = null;
+  user: User;
 
   public get authorized(): boolean {
-    return !!this.username;
+    return !!this.user;
   }
 }

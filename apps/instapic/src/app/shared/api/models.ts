@@ -3,6 +3,16 @@ export interface ApiResult {
   errorMessage?: string;
 }
 
-export interface UserRaw {
+export interface PhotoRaw {
+  id: number;
+  description: string;
   username: string;
+  createdAt: Date;
+}
+
+export interface UserRaw {
+  id: string;
+  username: string;
+
+  photos: PhotoRaw[];
 }

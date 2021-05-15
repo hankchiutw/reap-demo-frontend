@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { AuthStatus } from '@app/entities';
+import { AuthStatus, Photo, User } from '@app/entities';
 import { ApiService, ProcedurePath, UserRaw } from '@app/shared';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -44,8 +44,9 @@ export class AuthGuard implements CanActivate {
 
   private resolveAuthStatus(): Observable<AuthStatus> {
     return this.api.get<UserRaw>(ProcedurePath.me).pipe(
-      map(({ username }) => {
-        this.authStatus.username = username;
+      map(toUser),
+      map((user) => {
+        this.authStatus.user = user;
         return this.authStatus;
       }),
       catchError(() => {
@@ -53,4 +54,17 @@ export class AuthGuard implements CanActivate {
       })
     );
   }
+}
+
+function toUser(raw: UserRaw): User {
+  const user = new User();
+  Object.assign(user, raw);
+
+  user.photos = raw.photos.map((rawPhoto) => {
+    const photo = new Photo();
+    Object.assign(photo, rawPhoto);
+    return photo;
+  });
+
+  return user;
 }
