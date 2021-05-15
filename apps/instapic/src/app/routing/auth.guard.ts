@@ -50,6 +50,7 @@ export class AuthGuard implements CanActivate {
         return this.authStatus;
       }),
       catchError(() => {
+        this.authStatus.user = null;
         return of(this.authStatus);
       })
     );
