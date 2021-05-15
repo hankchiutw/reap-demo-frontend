@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppTestingModule } from '@app/app-testing.module';
 
 import { LoginFormUsecase } from './login-form.usecase';
@@ -8,7 +9,7 @@ describe('LoginFormUsecase', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppTestingModule],
+      imports: [AppTestingModule, RouterTestingModule],
       providers: [LoginFormUsecase],
     });
     service = TestBed.inject(LoginFormUsecase);
