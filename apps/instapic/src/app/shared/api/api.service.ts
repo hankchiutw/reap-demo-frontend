@@ -8,6 +8,8 @@ import { ProcedurePath, ResourcePath } from './request-path';
 
 interface Params {
   body?: unknown;
+  headers?: Record<string, string>;
+  reportProgress?: boolean;
 }
 
 interface ApiOptions extends Params {
@@ -20,12 +22,20 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   public send<T>(options: ApiOptions): Observable<T> {
-    const { method, path, body } = options;
-    const url = `${env.apiUrl}/${path}`;
+    const { method, path, body, headers, reportProgress } = options;
     const requestOptions = {
       body,
+      headers,
+      reportProgress,
       withCredentials: true,
     };
+    if (reportProgress) {
+      Object.assign(requestOptions, {
+        observe: 'events',
+      });
+    }
+
+    const url = `${env.apiUrl}/${path}`;
     return this.http.request<ApiResult>(method, url, requestOptions).pipe(
       map(({ result, errorMessage }) => {
         if (errorMessage) {

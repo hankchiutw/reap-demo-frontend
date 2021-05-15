@@ -3,6 +3,7 @@ export enum ProcedurePath {
   authSignUp = 'auth/signup',
   authLogout = 'auth/logout',
   me = 'auth/me',
+  photoUpload = 'photo/upload',
 }
 
 export enum ResourcePath {
