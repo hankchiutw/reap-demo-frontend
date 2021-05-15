@@ -33,6 +33,7 @@
     "comma-dangle": ["warn", "always-multiline"],
     "semi": ["warn", "always"],
     "no-console": ["warn"],
+    "sort-imports": ["warn", { "ignoreDeclarationSort": true }],
     "import/order": [
       "warn",
       {

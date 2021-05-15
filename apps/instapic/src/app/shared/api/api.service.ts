@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment as env } from '@env';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ResourcePath, ProcedurePath } from './request-path';
 import { ApiResult } from './models';
+import { ProcedurePath, ResourcePath } from './request-path';
 
 interface Params {
   body?: unknown;

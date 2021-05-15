@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { LoginFormUsecase, SubmitPayload } from './login-form.usecase';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
+import { LoginFormUsecase, SubmitPayload } from './login-form.usecase';
 
 @Component({
   selector: 'app-login-form',
