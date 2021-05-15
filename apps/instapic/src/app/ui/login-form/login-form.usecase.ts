@@ -3,17 +3,19 @@ import { Router } from '@angular/router';
 import { ApiService, ProcedurePath } from '@app/shared';
 import { tap } from 'rxjs/operators';
 
+export interface SubmitPayload {
+  username: string;
+  password: string;
+}
+
 @Injectable()
 export class LoginFormUsecase {
   constructor(private api: ApiService, private router: Router) {}
 
-  public doLogin(username: string, password: string) {
+  public doLogin(body: SubmitPayload) {
     return this.api
       .post(ProcedurePath.authLogin, {
-        body: {
-          username,
-          password,
-        },
+        body,
       })
       .pipe(
         tap(() => {
@@ -22,12 +24,9 @@ export class LoginFormUsecase {
       );
   }
 
-  public doSignUp(username: string, password: string) {
+  public doSignUp(body: SubmitPayload) {
     return this.api.post(ProcedurePath.authSignUp, {
-      body: {
-        username,
-        password,
-      },
+      body,
     });
   }
 }

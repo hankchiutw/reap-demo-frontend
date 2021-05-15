@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { LoginFormUsecase } from './login-form.usecase';
+import { LoginFormUsecase, SubmitPayload } from './login-form.usecase';
 import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 
 @Component({
@@ -23,32 +24,23 @@ export class LoginFormComponent {
 
   constructor(private fb: FormBuilder, private usecase: LoginFormUsecase) {}
 
-  public doLogin() {
-    this.usecase
-      .doLogin(this.formValue('username'), this.formValue('password'))
+  public submit() {
+    const payload: SubmitPayload = {
+      username: this.formValue('username'),
+      password: this.formValue('password'),
+    };
+
+    const submit$ = this.useSignUp
+      ? this.doSignUp(payload)
+      : this.doLogin(payload);
+    submit$
       .pipe(
         catchError((e) => {
           this.errorMessage$.next(e);
-          return null;
+          return [];
         })
       )
       .subscribe();
-  }
-
-  public doSignUp() {
-    this.usecase
-      .doSignUp(this.formValue('username'), this.formValue('password'))
-      .pipe(
-        catchError((e) => {
-          this.errorMessage$.next(e);
-          return null;
-        })
-      )
-      .subscribe(() => {
-        this.reset();
-        alert('Sign up successfully');
-        this.useSignUp = false;
-      });
   }
 
   public reset() {
@@ -59,5 +51,19 @@ export class LoginFormComponent {
 
   private formValue(name: string) {
     return this.formGroup.get(name).value;
+  }
+
+  private doLogin(payload: SubmitPayload) {
+    return this.usecase.doLogin(payload);
+  }
+
+  private doSignUp(payload: SubmitPayload) {
+    return this.usecase.doSignUp(payload).pipe(
+      tap(() => {
+        this.reset();
+        alert('Sign up successfully');
+        this.useSignUp = false;
+      })
+    );
   }
 }
