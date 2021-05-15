@@ -6,4 +6,4 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [CommonModule, FormsModule, ReactiveFormsModule],
 })
-export class UiTestingModule {}
+export class LoginUiTestingModule {}

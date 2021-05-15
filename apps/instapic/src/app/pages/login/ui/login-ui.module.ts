@@ -6,8 +6,8 @@ import { LoginFormComponent } from './login-form/login-form.component';
 const publicComponents = [LoginFormComponent];
 
 @NgModule({
-  declarations: [publicComponents],
+  declarations: [...publicComponents],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  exports: [publicComponents],
+  exports: [...publicComponents],
 })
-export class UiModule {}
+export class LoginUiModule {}
