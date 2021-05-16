@@ -23,6 +23,7 @@ export class ApiService {
 
   public send<T>(options: ApiOptions): Observable<T> {
     const { method, path, body, headers, reportProgress } = options;
+    const url = `${env.apiUrl}/${path}`;
     const requestOptions = {
       body,
       headers,
@@ -35,9 +36,8 @@ export class ApiService {
       });
     }
 
-    const url = `${env.apiUrl}/${path}`;
     return this.http.request<ApiResult>(method, url, requestOptions).pipe(
-      map(({ result, errorMessage }) => {
+      map(({ result, errorMessage }: ApiResult) => {
         if (errorMessage) {
           throw errorMessage;
         }
