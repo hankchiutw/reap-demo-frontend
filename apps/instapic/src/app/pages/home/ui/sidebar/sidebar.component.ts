@@ -13,6 +13,7 @@ import { SidebarUsecase } from './sidebar.usecase';
 })
 export class SidebarComponent implements OnInit {
   otherUsers$: Observable<User[]>;
+  selectedUserId$ = this.context.selectedUserId$;
 
   get myId() {
     return this.authStatus.user.id;
