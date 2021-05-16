@@ -9,6 +9,7 @@ import { ProcedurePath, ResourcePath } from './request-path';
 interface Params {
   body?: unknown;
   headers?: Record<string, string>;
+  query?: Record<string, any>;
   reportProgress?: boolean;
 }
 

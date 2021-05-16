@@ -8,4 +8,5 @@ export enum ProcedurePath {
 
 export enum ResourcePath {
   user = 'user',
+  photo = 'photo',
 }

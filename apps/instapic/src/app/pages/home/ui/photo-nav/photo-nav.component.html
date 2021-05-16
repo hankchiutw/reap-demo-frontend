@@ -1,2 +1,3 @@
-<p>photo-nav works!</p>
-{{ userId }}
+<div *ngFor="let photo of photos$ | async">
+  {{ photo.id }}
+</div>
