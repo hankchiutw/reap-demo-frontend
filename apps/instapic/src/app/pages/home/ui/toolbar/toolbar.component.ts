@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { tap } from 'rxjs/operators';
 import { UploadUsecase } from './upload.usecase';
 
 @Component({
@@ -16,13 +15,6 @@ export class ToolbarComponent {
     if (!file) {
       return;
     }
-    this.uploadUsecase
-      .upload(file)
-      .pipe(
-        tap((p) => {
-          console.log('xxx: progress', p);
-        })
-      )
-      .subscribe();
+    this.uploadUsecase.upload(file);
   }
 }

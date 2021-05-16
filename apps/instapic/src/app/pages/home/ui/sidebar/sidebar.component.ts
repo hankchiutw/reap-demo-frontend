@@ -26,6 +26,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectUser(this.myId);
+    this.usecase.fetchMyPhotos();
     this.otherUsers$ = this.usecase.fetchOtherUsers();
   }
 

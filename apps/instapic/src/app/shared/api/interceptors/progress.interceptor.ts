@@ -28,20 +28,20 @@ export class ProgressInterceptor implements HttpInterceptor {
 
 function progressTransformer(event: HttpEvent<any>): ApiProgressEvent {
   const res: ApiProgressEvent = { type: HttpEventType.User, result: null };
-  res.result = -1;
+  res.result = { progress: -1 };
   switch (event.type) {
     case HttpEventType.Sent:
-      res.result = 0;
+      res.result = { progress: 0 };
       break;
     case HttpEventType.UploadProgress:
-      res.result = Math.round((100 * event.loaded) / event.total);
+      res.result = { progress: Math.round((100 * event.loaded) / event.total) };
       break;
     case HttpEventType.ResponseHeader:
     case HttpEventType.DownloadProgress:
-      res.result = 100;
+      res.result = { progress: 100 };
       break;
     case HttpEventType.Response:
-      res.result = event.body;
+      res.result = { completed: true, body: event.body };
       break;
   }
   return res;
