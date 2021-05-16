@@ -1,3 +1,6 @@
 <div class="title">Instapic</div>
-<div class="row">My photos</div>
+<div class="row" (click)="selectUser(myId)">My photos</div>
+<div *ngFor="let user of otherUsers$ | async" (click)="selectUser(user.id)">
+  {{ user.username }}
+</div>
 <div (click)="logout()">Logout</div>

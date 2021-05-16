@@ -1,17 +1,39 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LogoutUsecase } from './logout.usecase';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AuthStatus, User } from '@app/entities';
+import { Observable } from 'rxjs';
+import { HomeContext } from '../../entities';
+import { SidebarUsecase } from './sidebar.usecase';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LogoutUsecase],
+  providers: [SidebarUsecase],
 })
-export class SidebarComponent {
-  constructor(private logoutUsecase: LogoutUsecase) {}
+export class SidebarComponent implements OnInit {
+  otherUsers$: Observable<User[]>;
+
+  get myId() {
+    return this.authStatus.user.id;
+  }
+
+  constructor(
+    private usecase: SidebarUsecase,
+    private context: HomeContext,
+    private authStatus: AuthStatus
+  ) {}
+
+  ngOnInit(): void {
+    this.selectUser(this.myId);
+    this.otherUsers$ = this.usecase.fetchOtherUsers();
+  }
+
+  selectUser(userId: number) {
+    this.usecase.selectUser(userId);
+  }
 
   logout() {
-    this.logoutUsecase.logout().subscribe();
+    this.usecase.logout().subscribe();
   }
 }

@@ -2,17 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppTestingModule } from '@app/app-testing.module';
 
-import { LogoutUsecase } from './logout.usecase';
+import { SidebarUsecase } from './sidebar.usecase';
 
-describe('LogoutUsecase', () => {
-  let service: LogoutUsecase;
+describe('SidebarUsecase', () => {
+  let service: SidebarUsecase;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppTestingModule, RouterTestingModule],
-      providers: [LogoutUsecase],
+      providers: [SidebarUsecase],
     });
-    service = TestBed.inject(LogoutUsecase);
+    service = TestBed.inject(SidebarUsecase);
   });
 
   it('should be created', () => {

@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AuthStatus } from '@app/entities';
-import { HomeContext } from './entities';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +6,4 @@ import { HomeContext } from './entities';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
-  constructor(private context: HomeContext, private authStatus: AuthStatus) {}
-
-  ngOnInit(): void {
-    this.context.selectedUserId = this.authStatus.user.id;
-  }
-}
+export class HomeComponent {}

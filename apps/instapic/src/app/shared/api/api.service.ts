@@ -6,14 +6,14 @@ import { map } from 'rxjs/operators';
 import { ApiResult } from './models';
 import { ProcedurePath, ResourcePath } from './request-path';
 
-interface Params {
+interface RequestOptions {
   body?: unknown;
   headers?: Record<string, string>;
-  query?: Record<string, any>;
+  params?: Record<string, any>;
   reportProgress?: boolean;
 }
 
-interface ApiOptions extends Params {
+interface ApiOptions extends RequestOptions {
   method: 'post' | 'get' | 'delete' | 'put';
   path: ProcedurePath | ResourcePath;
 }
@@ -23,10 +23,11 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   public send<T>(options: ApiOptions): Observable<T> {
-    const { method, path, body, headers, reportProgress } = options;
+    const { method, path, body, headers, params, reportProgress } = options;
     const url = `${env.apiUrl}/${path}`;
     const requestOptions = {
       body,
+      params,
       headers,
       reportProgress,
       withCredentials: true,
@@ -47,19 +48,25 @@ export class ApiService {
     );
   }
 
-  public post<T>(path: ApiOptions['path'], params?: Params): Observable<T> {
+  public post<T>(
+    path: ApiOptions['path'],
+    options?: RequestOptions
+  ): Observable<T> {
     return this.send<T>({
       method: 'post',
       path,
-      ...params,
+      ...options,
     });
   }
 
-  public get<T>(path: ApiOptions['path'], params?: Params): Observable<T> {
+  public get<T>(
+    path: ApiOptions['path'],
+    options?: RequestOptions
+  ): Observable<T> {
     return this.send<T>({
       method: 'get',
       path,
-      ...params,
+      ...options,
     });
   }
 }
