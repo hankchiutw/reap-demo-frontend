@@ -2,12 +2,14 @@
   <div class="img-container">
     <img src="{{ apiUrl }}/{{ photo.staticPath }}" width="300" height="200" />
   </div>
-  <div class="info-container">
-    <span class="primary">
-      {{ photo.description }}
-    </span>
-    <span class="secondary">
-      {{ photo.username }}
-    </span>
+  <div class="primary-info">
+    {{ photo.description }}
+  </div>
+  <div class="secondary-info">
+    <mat-icon>person_outline</mat-icon>&nbsp;{{
+      photo.username
+    }}&nbsp;&nbsp;<mat-icon>schedule</mat-icon>&nbsp;{{
+      photo.createdAt | date: 'MM/dd hh:mm'
+    }}
   </div>
 </div>

@@ -19,6 +19,8 @@
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
   &.selected {
     background: #84c7ae;
@@ -41,5 +43,6 @@
     font-weight: bold;
     padding: 4px;
     color: #505050;
+    margin-bottom: 4px;
   }
 }
