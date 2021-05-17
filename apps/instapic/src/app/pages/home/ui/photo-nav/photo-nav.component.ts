@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AuthStatus, Photo } from '@app/entities';
+import { Photo } from '@app/entities';
 import { environment as env } from '@env';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { HomeContext } from '../../entities';
 import { PhotoDaoUsecase } from './photo-dao.usecase';
 
 @Component({
@@ -18,23 +16,9 @@ export class PhotoNavComponent implements OnInit {
 
   apiUrl = env.apiUrl;
 
-  private get myId() {
-    return this.authStatus.user.id;
-  }
-
-  constructor(
-    private photoDao: PhotoDaoUsecase,
-    private authStatus: AuthStatus,
-    private context: HomeContext
-  ) {}
+  constructor(private photoDao: PhotoDaoUsecase) {}
 
   ngOnInit(): void {
-    this.photos$ = this.context.selectedUserId$.pipe(
-      switchMap((userId) => {
-        return userId === this.myId
-          ? this.context.myPhotos$
-          : this.photoDao.getList(userId);
-      })
-    );
+    this.photos$ = this.photoDao.fetchPhotos();
   }
 }

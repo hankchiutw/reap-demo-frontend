@@ -6,4 +6,5 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 export class HomeContext {
   selectedUserId$ = new ReplaySubject<number>(1);
   myPhotos$ = new BehaviorSubject<Photo[]>([]);
+  newestFirst$ = new BehaviorSubject<boolean>(true);
 }
