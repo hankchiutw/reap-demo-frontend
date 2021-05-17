@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthStatus, Photo } from '@app/entities';
+import { environment as env } from '@env';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HomeContext } from '../../entities';
@@ -14,6 +15,8 @@ import { PhotoDaoUsecase } from './photo-dao.usecase';
 })
 export class PhotoNavComponent implements OnInit {
   photos$: Observable<Photo[]>;
+
+  apiUrl = env.apiUrl;
 
   private get myId() {
     return this.authStatus.user.id;

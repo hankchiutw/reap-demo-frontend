@@ -1,4 +1,13 @@
-<div *ngFor="let photo of photos$ | async">
-  {{ photo.id }}
-  {{ photo.description }}
+<div class="photo-container" *ngFor="let photo of photos$ | async">
+  <div class="img-container">
+    <img src="{{ apiUrl }}/{{ photo.staticPath }}" width="300" height="200" />
+  </div>
+  <div class="info-container">
+    <span class="primary">
+      {{ photo.description }}
+    </span>
+    <span class="secondary">
+      {{ photo.username }}
+    </span>
+  </div>
 </div>

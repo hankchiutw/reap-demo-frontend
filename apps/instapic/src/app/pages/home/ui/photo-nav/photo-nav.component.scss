@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+
+.photo-container {
+  max-width: 200px;
+  margin: 12px;
+}
+
+.img-container {
+  width: 200px;
+  height: 120px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+img {
+  object-fit: cover;
+}
+
+.info-container {
+  display: flex;
+  margin-top: 8px;
+
+  .primary {
+    flex: 3;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .secondary {
+    color: #878787;
+    font-size: 12px;
+  }
+}
