@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppTestingModule } from '@app/app-testing.module';
+import { HomeTestingModule } from '@app/pages/home/home-testing.module';
 
 import { PhotoNavComponent } from './photo-nav.component';
 
@@ -8,9 +10,9 @@ describe('PhotoNavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PhotoNavComponent ]
-    })
-    .compileComponents();
+      imports: [AppTestingModule, HomeTestingModule],
+      declarations: [PhotoNavComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

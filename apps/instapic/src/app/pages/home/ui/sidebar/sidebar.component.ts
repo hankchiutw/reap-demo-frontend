@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
   selectedUserId$ = this.context.selectedUserId$;
 
   get myId() {
-    return this.authStatus.user.id;
+    return this.authStatus.user?.id;
   }
 
   constructor(

@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppTestingModule } from '@app/app-testing.module';
+import { HomeTestingModule } from '@app/pages/home/home-testing.module';
+import { HomeUiTestingModule } from '@app/pages/home/ui/home-ui-testing.module';
 
 import { ToolbarComponent } from './toolbar.component';
 
@@ -8,9 +11,8 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToolbarComponent ]
-    })
-    .compileComponents();
+      imports: [AppTestingModule, HomeTestingModule, HomeUiTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

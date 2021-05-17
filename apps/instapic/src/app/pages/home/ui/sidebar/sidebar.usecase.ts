@@ -9,7 +9,7 @@ import { HomeContext } from '../../entities';
 @Injectable()
 export class SidebarUsecase {
   private get myId() {
-    return this.authStatus.user.id;
+    return this.authStatus.user?.id;
   }
 
   constructor(
